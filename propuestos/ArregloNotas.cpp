@@ -11,18 +11,30 @@
 
 // --> Atributos Generales
 
-int opcion,cedula[max],cant_alumnos;
+// --> Estructura del Arreglo Alumnos
+struct Alumnos
+{
+   int cedula;	
+   char nombres[20];
+   float nota;
+   char notaletra[2];
+};
+
+int opcion,cant_alumnos;
 char respuesta='s';
-int nota[max];
 	
 // --> Funcion para capturar los datos por pantalla
 void entrada(){
     
+    // --> Preguntamos la cantidad de alumnos a registrar
 	printf("Ingrese la Cantidad de Alumnos a Registrar:");
     scanf("%d",&cant_alumnos);
     
     // --> Validamos que la cantidad de alumnos a ingresar cumpla con el limite...
-    if(cant_alumnos>=0 && cant_alumnos<=max){
+    if(cant_alumnos>0 && cant_alumnos<=max){
+	  
+	  // --> Instancio el Arreglo Struct Alumnos
+	  struct Alumnos alum[cant_alumnos];
 	  
 	  while(respuesta=='s'||respuesta=='S'){
       
@@ -39,24 +51,49 @@ void entrada(){
       switch(opcion){
 		
 	    case 1:
-		   
+		   system("cls");
 		   printf("Opcion 1 - Registrar Alumnos \n");
 		   
 		   for(int i=0;i<cant_alumnos;i++){
+		   	  // --> Cedula del Alumno
 		      printf("Ingrese Cedula:");
-			  scanf("%d",&cedula[i]);			  
+			  scanf("%d",&alum[i].cedula);	
+			  // --> Nombre del Alumnos
+			  printf("Ingrese Nombre:");
+			  scanf("%s",&alum[i].nombres);	
+			  // --> Nota Parcial
+			  printf("Ingrese Nota (0 - 100):");
+			  scanf("%f",&alum[i].nota);
+			  
+			  // --> Condicional para validar la nota segun la letra.
+			  if(alum[i].nota >0 && alum[i].nota >=72){
+			  	
+			  	alum[i].notaletra="A";
+			  }
+			  else if((alum[i].nota>=63)&&(alum[i].nota<=71)){
+			  	alum[i].notaletra="B";
+			  }		
+			  else if(alum[i].nota>=48&&alum[i].nota<=62){
+			  	alum[i].notaletra="C";
+			  }
+			  else{
+			  	alum[i].notaletra="D";
+			  }	  
 			}
 			printf("Desea Seguir (S/N):");
 			respuesta=getch();
 			
 		 break;
 	    case 2:
+	    	system("cls");
 			printf("Opcion 2 - Ver Todos \n");
 			
-			printf("Cedula \n");
+			printf("Cedula \t \t Nombres \t \t Nota \t \t Letra \n");
+			printf("----------------------------------------------------- \n");
 			for(int j=0;j<cant_alumnos;j++){
 				
-				printf("%d",cedula[j]);
+				printf("%d \t %s \t %5.2f \t %s \n",alum[j].cedula,alum[j].nombres,alum[j].nota,alum[j].notaletra);
+				printf("----------------------------------------------------- \n");
 			}
 			
 			getch();
@@ -76,6 +113,11 @@ void entrada(){
 			getch();
       } 
 	}    	
+	}
+	else{
+		printf("Rango no Permitido...");
+		
+		getch();
 	}
     
 }
