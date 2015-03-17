@@ -17,7 +17,6 @@ struct Alumnos
    int cedula;	
    char nombres[20];
    float nota;
-   char notaletra[2];
 };
 
 int opcion,cant_alumnos;
@@ -32,6 +31,9 @@ void entrada(){
     
     // --> Validamos que la cantidad de alumnos a ingresar cumpla con el limite...
     if(cant_alumnos>0 && cant_alumnos<=max){
+	  
+	  // --> char notaletra
+	  char notaletra[cant_alumnos][1];
 	  
 	  // --> Instancio el Arreglo Struct Alumnos
 	  struct Alumnos alum[cant_alumnos];
@@ -66,19 +68,23 @@ void entrada(){
 			  scanf("%f",&alum[i].nota);
 			  
 			  // --> Condicional para validar la nota segun la letra.
-			  if(alum[i].nota >0 && alum[i].nota >=72){
-			  	
-			  	alum[i].notaletra="A";
-			  }
-			  else if((alum[i].nota>=63)&&(alum[i].nota<=71)){
-			  	alum[i].notaletra="B";
-			  }		
-			  else if(alum[i].nota>=48&&alum[i].nota<=62){
-			  	alum[i].notaletra="C";
-			  }
-			  else{
-			  	alum[i].notaletra="D";
-			  }	  
+			 if(alum[i].nota>0&&alum[i].nota>=72){
+			 	
+			 	notaletra[i][1]={'A'};
+			 }
+			 else if(alum[i].nota>=63&&alum[i].nota<=71){
+			 	
+			 	notaletra[i][1]={'B'};
+			 }
+			 else if(alum[i].nota>=48&&alum[i].nota<=62){
+			 	
+			 	notaletra[i][1]={'C'};
+			 }
+			 else{
+			 	
+			 	notaletra[i][1]={'D'};
+			 }
+			  
 			}
 			printf("Desea Seguir (S/N):");
 			respuesta=getch();
@@ -89,11 +95,11 @@ void entrada(){
 			printf("Opcion 2 - Ver Todos \n");
 			
 			printf("Cedula \t \t Nombres \t \t Nota \t \t Letra \n");
-			printf("----------------------------------------------------- \n");
+			printf("------------------------------------------------------------------- \n");
 			for(int j=0;j<cant_alumnos;j++){
 				
-				printf("%d \t %s \t %5.2f \t %s \n",alum[j].cedula,alum[j].nombres,alum[j].nota,alum[j].notaletra);
-				printf("----------------------------------------------------- \n");
+				printf("%d \t %s \t %5.2f \t \t %c \n",alum[j].cedula,alum[j].nombres,alum[j].nota,notaletra[j][1]);
+				printf("------------------------------------------------------------------- \n");
 			}
 			
 			getch();
