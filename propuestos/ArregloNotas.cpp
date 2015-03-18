@@ -17,6 +17,7 @@ struct Alumnos
    int cedula;	
    char nombres[20];
    float nota;
+   char notl;
 };
 
 int opcion,cant_alumnos;
@@ -70,48 +71,67 @@ void entrada(){
 			  // --> Condicional para validar la nota segun la letra.
 			 if(alum[i].nota>0&&alum[i].nota>=72){
 			 	
-			 	notaletra[i][1]={'A'};
+			 	notaletra[i][1]='A';
+			 	alum[i].notl=notaletra[i][1];
 			 }
 			 else if(alum[i].nota>=63&&alum[i].nota<=71){
 			 	
-			 	notaletra[i][1]={'B'};
+			 	notaletra[i][1]='B';
+			 	alum[i].notl=notaletra[i][1];
 			 }
 			 else if(alum[i].nota>=48&&alum[i].nota<=62){
 			 	
-			 	notaletra[i][1]={'C'};
+			 	notaletra[i][1]='C';
+			 	alum[i].notl=notaletra[i][1];
 			 }
 			 else{
 			 	
-			 	notaletra[i][1]={'D'};
+			 	notaletra[i][1]='D';
+			 	alum[i].notl=notaletra[i][1];
 			 }
 			  
 			}
-			printf("Desea Seguir (S/N):");
-			respuesta=getch();
 			
 		 break;
 	    case 2:
 	    	system("cls");
 			printf("Opcion 2 - Ver Todos \n");
 			
-			printf("Cedula \t \t Nombres \t \t Nota \t \t Letra \n");
+			printf("------------------------------------------------------------------- \n");
+			printf("| Cedula  \t |Nombres \t | Nota  \t | Letra |\n");
 			printf("------------------------------------------------------------------- \n");
 			for(int j=0;j<cant_alumnos;j++){
 				
-				printf("%d \t %s \t %5.2f \t \t %c \n",alum[j].cedula,alum[j].nombres,alum[j].nota,notaletra[j][1]);
+				printf("| %d \t | %s \t | %5.2f \t | %c \n",alum[j].cedula,alum[j].nombres,alum[j].nota,alum[j].notl);
 				printf("------------------------------------------------------------------- \n");
 			}
 			
 			getch();
 			break;
 		case 3:
-			printf("Opcion 3 - Ver Alumnos por Clasificacion de Notas \n");
+            system("cls");
+			printf("Opcion 3 - Ver Alumnos por Clasificacion por letra de manera Descendente \n");
+			
+			printf("------------------------------------------------------------------- \n");
+			printf("| Cedula  \t | Nombres \t |Nota  \t | Letra | \n");
+			printf("------------------------------------------------------------------- \n");
+			
+			for(int h=0; h<cant_alumnos;h++){
+                
+                if(notaletra[h][1]==alum[h].notl){
+                   printf("|%d \t |%s \t |%5.2f \t |%c \n",alum[h].cedula,alum[h].nombres,alum[h].nota,alum[h].notl);
+				   printf("------------------------------------------------------------------- \n");
+                }
+            }
+            getch();
+            
 			break;	
 		case 4:
-			printf("Fin del Programa.");
+			printf("¿Desea Realmente Salir? (S/N):");
+			respuesta=getch();
 			
-			respuesta='n';
-			
+			printf("Hasta Luego... ");
+			getch();
 			break;	
 			
 		default :
